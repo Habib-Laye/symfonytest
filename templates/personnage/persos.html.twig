@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personnages{% endblock %}
+
+{% block monTitre %}
+Liste des personnages
+{% endblock %}
+
+{% block body %}
+
+<table class="table">
+
+    <tr class="thead-dark">
+        <th>Image</th>
+        <th>Nom</th>
+        <th>Age</th>
+        <th>Sexe</th>
+        <th>Force</th>
+        <th>Agilité</th>
+        <th>Intelligence</th>
+    </tr>
+    
+    {% for player in players %} <!-- Création d'une boucle for avec twig -->
+
+    <tr> 
+        <td><img src="{{asset('images/personnages/' ~ player.pseudo ~ '.JPG')}}"> </td> 
+        
+        <td><a href="{{ path('afficher_personnage', {'pseudo' : player.pseudo|lower}) }}">{{ player.pseudo }}</a></td>  <!--Affichage de la variable qui sera player.nom -->
+
+        <td>{{ player.age }}</td>
+
+        <td>
+            {% if player.sexe %}
+                Homme
+            {% else %}
+                Femme
+            {% endif %}
+        </td>
+        <td>{{ player.carac.force }}</td>
+        <td>{{ player.carac.agi }}</td>
+        <td>{{ player.carac.intel }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}
+
+
